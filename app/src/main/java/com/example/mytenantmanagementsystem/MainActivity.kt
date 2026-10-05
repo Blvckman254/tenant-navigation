@@ -23,9 +23,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.saveButton.setOnClickListener {
-            val name = binding.tenantNameEditText.text.toString()
-            val phone = binding.phoneEditText.text.toString()
-            val rent = binding.rentEditText.text.toString()
+            val name = binding.tenantNameEditText.text.toString().trim()
+            val phone = binding.phoneEditText.text.toString().trim()
+            val rent = binding.rentEditText.text.toString().trim()
+
+            var valid = true
+            if (name.isEmpty()) {
+                binding.tenantNameEditText.error = "Required"
+                valid = false
+            }
+            if (phone.isEmpty()) {
+                binding.phoneEditText.error = "Required"
+                valid = false
+            }
+            if (rent.isEmpty()) {
+                binding.rentEditText.error = "Required"
+                valid = false
+            }
+            if (!valid) {
+                return@setOnClickListener
+            }
 
             val tenant = Tenant(name, phone, rent)
             binding.tenant = tenant
