@@ -17,6 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val email = intent.getStringExtra("EMAIL")
+        if (email != null) {
+            Toast.makeText(this, "Logged in as $email", Toast.LENGTH_SHORT).show()
+        }
 
         binding.saveButton.setOnClickListener {
             val name = binding.tenantNameEditText.text.toString()
